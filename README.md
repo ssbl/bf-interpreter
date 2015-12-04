@@ -1,6 +1,6 @@
 Brainf*ck interpreter.
 
-Uses monad transformers to run the IO commands `,` and `.`. I haven't tested
+Uses a monad transformer to run the IO commands `.` and `,`. I haven't tested
 this much, and it's pretty fragile at the moment. The hello-world program from
 Wikipedia (as a single line of code) runs perfectly, though.
 
