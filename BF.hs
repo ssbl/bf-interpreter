@@ -53,12 +53,12 @@ jumpTable code = go [] (enumerate code)
                               _   -> go stack xs
               where top = head stack
 
-run :: String -> IO ()
-run code = do
-  let jt = M.fromList $ jumpTable code
-      defaultState = ArrayState 0 0 array
-  go code jt defaultState
-    where go cs t dst = if (ip dst == length cs)
-                        then print dst
-                        else execStateT (command (cs !! (ip dst)) t) dst
-                                 >>= \s -> go cs t s
+execute :: String -> AS ()
+execute code = do
+  let jt  = M.fromList $ jumpTable code
+      len = length code
+  s <- get
+  if len == ip s
+  then return ()
+  else do command (code !! ip s) jt
+          execute code
